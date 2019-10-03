@@ -1,5 +1,8 @@
 # httpie commands
 
+
+#posts
+
 # get all posts
 http GET http://localhost:4000/posts
 

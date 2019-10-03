@@ -27,6 +27,9 @@ export default class Plant {
   @Column('text')
   userName: string;
 
+  @Column('bool')
+  donationMade: boolean;
+
   @Column('text')
   @Length(5, 100)
   @IsEmail()

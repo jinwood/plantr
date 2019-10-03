@@ -1,5 +1,6 @@
 import Router from 'koa-router';
 import PostController from './controllers/postController';
+import PlantController from './controllers/plantController';
 
 export const router: Router = new Router();
 
@@ -9,3 +10,6 @@ router.get('/posts', PostController.getPosts);
 router.get('/posts/:id', PostController.getPost);
 router.patch('/posts/:id', PostController.updatePost);
 router.delete('/posts/:id', PostController.deletePost);
+
+//plant
+router.post('/plants', PlantController.createPlant);
