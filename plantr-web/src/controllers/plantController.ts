@@ -1,11 +1,36 @@
 import { BaseContext } from 'koa';
-import { Repository, getManager, Not, Equal } from 'typeorm';
+import { Repository, getManager } from 'typeorm';
 import Plant from '../models/plant';
 import Post from '../models/post';
-import { PostType } from '../common/postType';
 import { ValidationError, validate } from 'class-validator';
 
 export default class PlantController {
+  public static async getPlants(ctx: BaseContext) {
+    const plantRepository: Repository<Plant> = getManager().getRepository(
+      Plant
+    );
+    const plants: Plant[] = await plantRepository.find();
+
+    ctx.status = 200;
+    ctx.body = plants;
+  }
+
+  public static async getPlant(ctx: BaseContext) {
+    const plantRepository: Repository<Plant> = getManager().getRepository(
+      Plant
+    );
+
+    const plant: Plant = await plantRepository.findOne(ctx.params.id);
+
+    if (plant) {
+      ctx.status = 200;
+      ctx.body = plant;
+    } else {
+      ctx.status = 400;
+      ctx.body = `no plant found with id ${ctx.params.id}`;
+    }
+  }
+
   public static async createPlant(ctx: BaseContext) {
     const postRepository: Repository<Post> = getManager().getRepository(Post);
     const plantRepository: Repository<Plant> = getManager().getRepository(
@@ -13,8 +38,6 @@ export default class PlantController {
     );
 
     // check the post exists
-    console.log(ctx.request.body.url);
-
     const post: Post = await postRepository.findOne({
       url: ctx.request.body.url
     });
@@ -26,7 +49,6 @@ export default class PlantController {
     }
 
     const newPlant: Plant = new Plant();
-    newPlant.count = ctx.request.body.count;
     newPlant.email = ctx.request.body.email;
     newPlant.userName = ctx.request.body.userName;
     newPlant.donationMade = false; //change this once api call made to charity
@@ -41,10 +63,8 @@ export default class PlantController {
     } else {
       try {
         const plant = plantRepository.save(newPlant).then(n => {
-          console.log(`created vehicle with id ${n.id}`);
+          console.log(`created plant with id ${n.id}`);
         });
-
-        console.table(plant);
 
         ctx.status = 201;
         ctx.response.body = { plant };

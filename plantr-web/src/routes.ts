@@ -12,4 +12,6 @@ router.patch('/posts/:id', PostController.updatePost);
 router.delete('/posts/:id', PostController.deletePost);
 
 //plant
+router.get('/plants', PlantController.getPlants);
+router.get('/plants/:id', PlantController.getPlant);
 router.post('/plants', PlantController.createPlant);

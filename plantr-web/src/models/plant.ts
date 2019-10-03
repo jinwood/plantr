@@ -21,9 +21,6 @@ export default class Plant {
   })
   post: Post;
 
-  @Column('integer')
-  count: number;
-
   @Column('text')
   userName: string;
 
