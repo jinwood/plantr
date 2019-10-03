@@ -13,4 +13,4 @@ http POST http://localhost:4000/posts/ url='https://old.reddit.com/r/plantr/comm
 http PATCH http://localhost:4000/posts/ url='https://old.reddit.com/r/plantr/comments/dcvw9p/test_post/foobar'
 
 # delete post
-http DELETE http://localhost:4000/posts
+http DELETE http://localhost:4000/posts/{id}
