@@ -7,3 +7,5 @@ export const router: Router = new Router();
 router.post('/posts', PostController.createPost);
 router.get('/posts', PostController.getPosts);
 router.get('/posts/:id', PostController.getPost);
+router.patch('/posts/:id', PostController.updatePost);
+router.delete('/posts/:id', PostController.deletePost);
