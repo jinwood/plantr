@@ -21,7 +21,7 @@ export default class Plant {
   })
   post: Post;
 
-  @Column('number')
+  @Column('integer')
   count: number;
 
   @Column('text')
